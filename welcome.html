@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="RESOURCES/CSS/style.css" type="text/css">
+    <title>Welcome</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Homepage</a></li>
+            <li><a href="#" id="logout">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Welcome!</h2>
+    <p id="user-email"></p>
+    <p id="username"></p>
+</main>
+
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyA_4d2_KLz0rVzKg5POkyFmSPzMDBZJ9tE",
+  authDomain: "fashion-websites-ea4be.firebaseapp.com",
+  projectId: "fashion-websites-ea4be",
+  storageBucket: "fashion-websites-ea4be.appspot.com",
+  messagingSenderId: "201048783064",
+  appId: "1:201048783064:web:c7ca910885960bbe827fad",
+  measurementId: "G-9YM7EF1079"
+
+    };
+
+    // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+
+    // Initialize Firestore
+    const db = firebase.firestore();
+
+    // Display user email and username
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            document.getElementById('user-email').textContent = `Logged in as: ${user.email}`;
+            db.collection('users').doc(user.uid).get().then((doc) => {
+                if (doc.exists) {
+                    document.getElementById('username').textContent = `Username: ${doc.data().username}`;
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch((error) => {
+                console.log("Error getting document:", error);
+            });
+        } else {
+            window.location.href = 'login.html';
+        }
+    });
+
+    // Logout function
+    document.getElementById('logout').addEventListener('click', () => {
+        firebase.auth().signOut().then(() => {
+            window.location.href = 'login.html';
+        }).catch((error) => {
+            alert(`Error: ${error.message}`);
+        });
+    });
+</script>
+</body>
+</html>

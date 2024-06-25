@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liked Items</title>
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="RESOURCES/CSS/styles.css">
+
+    <!-- link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .liked-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .liked-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">STYLE<span>SPHERE</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="hat.html">Hat</a>
+                <a href="bags.html">Bag</a>
+                <a href="clothes.html">Top</a>
+                <a href="pants.html">Bottom</a>
+                <a href="shawls.html">Hijab</a>
+                <a href="shoes.html">Shoes</a>
+                <a href="dresses.html">Dress</a>
+                <a href="likes.html" class="active">Likes</a>
+            </div>
+
+            <div class="right-nav">
+                <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="#"><i class="fa-regular fa-heart"></i></a>
+                <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="liked-items">
+        <!-- Liked items will be inserted here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 StyleSphere</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likedItemsContainer = document.querySelector('.liked-items');
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const itemHtml = localStorage.getItem(key);
+
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('liked-item');
+                itemDiv.innerHTML = itemHtml;
+
+                likedItemsContainer.appendChild(itemDiv);
+            }
+        });
+    </script>
+</body>
+</html>

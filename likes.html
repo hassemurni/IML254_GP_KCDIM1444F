@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liked Items</title>
+
+    <!-- Link File CSS -->
+    <link rel="stylesheet" href="RESOURCES/CSS/styles.css">
+
+    <!-- link Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .liked-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .liked-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            position: relative;
+        }
+        .liked-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .liked-item h5 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #111;
+        }
+        .liked-item .price {
+            color: #ee2761;
+            font-weight: bold;
+        }
+        .liked-item .remove {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #ee2761;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" class="logo">STYLE<span>SPHERE</span></a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="accessories.html">Accessories</a>
+                <a href="hat.html">Hat</a>
+                <a href="bags.html">Bag</a>
+                <a href="clothes.html">Top</a>
+                <a href="pants.html">Bottom</a>
+                <a href="shawls.html">Hijab</a>
+                <a href="shoes.html">Shoes</a>
+                <a href="dresses.html">Dress</a>
+            </div>
+
+            <div class="right-nav">
+             
+                <a href="likes.html"><i class="fa-regular fa-heart"></i></a>
+                
+            </div>
+        </nav>
+    </header>
+
+    <section class="liked-items">
+        <!-- Liked items will be inserted here -->
+    </section>
+
+    <footer>
+        <p>&copy; 2024 StyleSphere</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likedItemsContainer = document.querySelector('.liked-items');
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const itemHtml = localStorage.getItem(key);
+
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('liked-item');
+                itemDiv.innerHTML = itemHtml;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.classList.add('remove');
+                removeBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
+                removeBtn.onclick = function() {
+                    localStorage.removeItem(key);
+                    itemDiv.remove();
+                };
+
+                itemDiv.appendChild(removeBtn);
+                likedItemsContainer.appendChild(itemDiv);
+            }
+        });
+    </script>
+<footer>
+            <div class="contnaier">
+                <div class="big-rows">
+                    <h6 class="logo">STYLE<span>SPHERE</span></h6>
+                    <p>We hope that we already serve you with our good websites that make everything easier for you to shopping with us !</p>
+                        <div class="coical-icon">
+                            <a href="https://www.facebook.com/profile.php?id=100082574348925"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://www.tiktok.com/@leahhadidd"><i class="fa-brands fa-tiktok"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fa-brands fa-instagram"></i></a>
+                           
+                        </div>
+                </div>
+
+                <div class="row">
+                    <h2 class="tittle">Information</h2>
+                    <div class="links">
+                        <a href="about.html">About Us</a>
+                       <a href="terms.html">Terms</a>
+                        <a href="faq.html">Faq</a>
+                        <a href="returns.html">Returns</a>
+                    </div>
+                </div>
+
+                
+            <div class="bottom-footer">
+                <div class="content">
+                    <p>&copy; 2024 | STYLE <span>SPHERE</span></p>
+
+                    <div class="payment-img">
+                        <img src="RESOURCES/ICON/payment-1.png" alt="">
+                        <img src="RESOURCES/ICON/payment-2.png" alt="">
+                        <img src="RESOURCES/ICON/payment-3.png" alt="">
+                        <img src="RESOURCES/ICON/payment-4.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </footer>
+   
+</body>
+</html>
